@@ -15,7 +15,7 @@ L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 }).addTo(myMap);
 
 // If data.beta.nyc is down comment out this link
-var link = "https://raw.githubusercontent.com/frostbrosracing/state_boundaries_map/main/static/data/states.json";
+var link = "https://raw.githubusercontent.com/frostbrosracing/state_boundaries/main/static/data/states.json";
 
 
 // Use this link to get the geojson data.
