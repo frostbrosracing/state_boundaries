@@ -1,5 +1,7 @@
 # Added config.js
 config.js
+*.docx
+Resources/US_Accidents_Dec20_Updated.csv
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
