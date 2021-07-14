@@ -14,120 +14,117 @@ L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
   accessToken: API_KEY
 }).addTo(myMap);
 
-// If data.beta.nyc is down comment out this link
+// create a variable to link to the geoJson data
 var link = "https://raw.githubusercontent.com/frostbrosracing/state_boundaries/main/static/data/states.json";
 
-
-// Use this link to get the geojson data.
-// var link = "static/data/nyc.geojson";
 
 // Function that will determine the color of a neighborhood based on the borough it belongs to
 function chooseColor(name) {
   switch (name) {
     case "Arizona": 
-    return "red";
+    return "lightcoral";
   case "Arkansas": 
-    return "yellow";
+    return "red";
   case "California": 
-    return "pink";
+    return "tomato";
   case "Colorado": 
-    return "green";
+    return "peachpuff";
   case "Connecticut": 
-    return "orange";
+    return "darkorange";
   case "District of Columbia": 
-    return "purple";
+    return "orange";
   case "Georgia": 
-    return "blue";
+    return "gold";
   case "Hawaii": 
-    return "teal";
+    return "yellow";
   case "Illinois": 
-    return "orangered";
+    return "greenyellow";
   case "Indiana": 
     return "chartreuse";
   case "Louisiana": 
-    return "red";
+    return "palegreen";
   case "Minnesota": 
-    return "yellow";
+    return "forestgreen";
   case "Mississippi": 
-    return "pink";
+    return "lime";
   case "Montana": 
     return "green";
   case "New Mexico": 
-    return "orange";
+    return "aquamarine";
   case "North Dakota": 
-    return "purple";
+    return "aqua";
   case "Oklahoma": 
-    return "blue";
+    return "deepskyblue";
   case "Pennsylvania": 
-    return "teal";
+    return "lightskyblue";
   case "Tennessee": 
-    return "orangered";
+    return "lightsteelblue";
   case "Virginia": 
-    return "chartreuse";
+    return "royalblue";
   case "Puerto Rico": 
-    return "red";
+    return "blue";
   case "Delaware": 
-    return "yellow";
+    return "slateblue";
   case "West Virginia": 
-    return "pink";
+    return "mediumpurple";
   case "Wisconsin": 
-    return "green";
+    return "blueviolet";
   case "Wyoming": 
-    return "orange";
+    return "mediumorchid";
   case "Alabama": 
-    return "purple";
+    return "fuchsia";
   case "Alaska": 
-    return "blue";
+    return "deeppink";
   case "Florida": 
-    return "teal";
+    return "pink";
   case "Idaho": 
-    return "orangered";
+    return "lightcoral";
   case "Kansas": 
-    return "chartreuse";
+    return "red";
   case "Maryland": 
-    return "red";
+    return "tomato";
   case "New Jersey": 
-    return "yellow";
+    return "peachpuff";
   case "North Carolina": 
-    return "pink";
+    return "darkorange";
   case "South Carolina": 
-    return "green";
+    return "orange";
   case "Washington": 
-    return "orange";
+    return "gold";
   case "Vermont": 
-    return "purple";
+    return "yellow";
   case "Utah": 
-    return "blue";
+    return "greenyellow";
   case "Iowa": 
-    return "teal";
+    return "chartreuse";
   case "Kentucky": 
-    return "orangered";
+    return "palegreen";
   case "Maine": 
-    return "chartreuse";
+    return "forestgreen";
   case "Massachusetts": 
-    return "red";
+    return "lime";
   case "Michigan": 
-    return "yellow";
-  case "Missouri": 
-    return "pink";
-  case "Nebraska": 
     return "green";
+  case "Missouri": 
+    return "aquamarine";
+  case "Nebraska": 
+    return "aqua";
   case "Nevada": 
-    return "orange";
+    return "deepskyblue";
   case "New Hampshire": 
-    return "purple";
+    return "lightskyblue";
   case "New York": 
-    return "blue";
+    return "lightsteelblue";
   case "Ohio": 
-    return "teal";
+    return "royalblue";
   case "Oregon": 
-    return "orangered";
+    return "blue";
   case "Rhode Island": 
-    return "chartreuse";
+    return "slateblue";
   case "South Dakota": 
-    return "red";
+    return "mediumpurple";
   case "Texas": 
-    return "yellow";
+    return "blueviolet";
   }
 }
 
@@ -135,11 +132,11 @@ function chooseColor(name) {
 d3.json(link, function(data) {
   // Creating a geoJSON layer with the retrieved data
   L.geoJson(data, {
-    // Style each feature (in this case a neighborhood)
+    // Style each feature
     style: function(feature) {
       return {
         color: "red",
-        // Call the chooseColor function to decide which color to color our neighborhood (color based on borough)
+        // Call the chooseColor function to decide which color to color the state
         fillColor: chooseColor(feature.properties.NAME),
         fillOpacity: 0.5,
         weight: 1.5
@@ -149,21 +146,21 @@ d3.json(link, function(data) {
     onEachFeature: function(feature, layer) {
       // Set mouse events to change map styling
       layer.on({
-        // When a user's mouse touches a map feature, the mouseover event calls this function, that feature's opacity changes to 90% so that it stands out
+        // When a user's mouse touches a map feature, the mouseover event calls this function
         mouseover: function(event) {
           layer = event.target;
           layer.setStyle({
             fillOpacity: 1
           });
         },
-        // When the cursor no longer hovers over a map feature - when the mouseout event occurs - the feature's opacity reverts back to 50%
+        // When the cursor no longer hovers over a map feature - when the mouseout event occurs - the feature's opacity reverts back
         mouseout: function(event) {
           layer = event.target;
           layer.setStyle({
             fillOpacity: 0.5
           });
         },
-        // When a feature (neighborhood) is clicked, it is enlarged to fit the screen
+        // When a feature is clicked, it is enlarged to fit the screen
         click: function(event) {
           myMap.fitBounds(event.target.getBounds());
         }
